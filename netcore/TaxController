@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+
+namespace congestion.calculator
+{
+    public class TaxController : ApiController
+    {
+        private IVehicle vehicle;
+        public int GetVehicleTax(DataModelVehicle dataModel)
+        {
+           if(dataModel.VehicleName="Car")
+           {
+            vehicle=New Car();
+           }
+           if(dataModel.VehicleName="MotorBike")
+           {
+            vehicle=New MotorBike();
+           }
+           int CalculatedTax=CongestionTaxCalculator.GetTax(vehicle, dataModel.DateList.ToArray())
+           if (CalculatedTax == 0)  
+            {  
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));  
+            } 
+            return CalculatedTax;
+        }
+    }
+    public class DataModelVehicle
+    {
+      public string VehicleName{get;set;}
+      public List<DateTime> DateList{get;set;}
+    }
+}
