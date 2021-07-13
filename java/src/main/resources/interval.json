@@ -1,0 +1,42 @@
+[
+    {
+      "start": 600,
+      "end": 629,
+      "value": 8
+    },{
+      "start": 630,
+      "end": 659,
+      "value": 13
+    },{
+      "start": 700,
+      "end": 759,
+      "value": 18
+    },{
+      "start": 800,
+      "end": 829,
+      "value": 13
+    },{
+      "start": 830,
+      "end": 1459,
+      "value": 8
+    },{
+      "start": 1500,
+      "end": 1529,
+      "value": 13
+    },{
+      "start": 1530,
+      "end": 1659,
+      "value": 18
+    },{
+      "start": 1700,
+      "end": 1759,
+      "value": 13
+    },{
+      "start": 1800,
+      "end": 1829,
+      "value": 8
+    },{
+      "start": 1830,
+      "end": 559,
+      "value": 0
+    }]
