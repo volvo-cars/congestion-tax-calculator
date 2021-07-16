@@ -9,6 +9,7 @@ import com.congestiontaxcalculator.models.Diplomat;
 import com.congestiontaxcalculator.models.Emergency;
 import com.congestiontaxcalculator.models.Foreign;
 import com.congestiontaxcalculator.models.Military;
+import com.congestiontaxcalculator.models.Motorbike;
 import com.congestiontaxcalculator.models.Vehicle;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javax.ws.rs.BadRequestException;
@@ -58,6 +59,9 @@ public class CongestionTaxCalculatorV1Controller {
                 break;
             case "Military":
                 vehicle = new Military();
+                break;
+            case "Motorbike":
+                vehicle = new Motorbike();
                 break;
             case "Car":
                 vehicle = new Car();
