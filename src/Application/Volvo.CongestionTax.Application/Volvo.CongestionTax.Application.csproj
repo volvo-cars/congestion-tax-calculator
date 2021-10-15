@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="10.3.3" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.3.3" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain\Volvo.CongestionTax.Domain\Volvo.CongestionTax.Domain.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Volvo.Infrastructure\Volvo.Infrastructure.SharedKernel.csproj" />
+    <ProjectReference Include="..\Volvo.Application.SharedKernel\Volvo.Application.SharedKernel.csproj" />
+  </ItemGroup>
+
+</Project>
