@@ -6,6 +6,8 @@ namespace Volvo.CongestionTax.Application.Commands
     {
         public CalculateCongestionTaxCommandValidator()
         {
+            RuleFor(c => c.City).NotNull().NotEmpty();
+            RuleFor(c => c.CountryCode).NotNull().NotEmpty();
             RuleFor(c => c.VehicleType).NotNull().NotEmpty();
             RuleFor(c => c.PassagesTimes).NotNull().NotEmpty();
         }

@@ -6,10 +6,12 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
+using FluentValidation;
 using Newtonsoft.Json;
 using Volvo.CongestionTax.Application.Commands;
 using Volvo.CongestionTax.WebAPI.IntegrationTests.Extensions;
 using Xunit;
+using Xunit.Sdk;
 
 namespace Volvo.CongestionTax.WebAPI.IntegrationTests
 {
@@ -181,6 +183,26 @@ namespace Volvo.CongestionTax.WebAPI.IntegrationTests
             result.Amount.Should().Be(21);
         }
 
+        [Theory]
+        [MemberData(nameof(InvalidCommands.CalculateCongestionTaxCommands), MemberType = typeof(InvalidCommands))]
+        public async Task ShouldReturnInternalServerErrorWhenCommandIsNotValid(CalculateCongestionTaxCommand command)
+        {
+            var response = await SendCalculateCongestionTaxRequest(command);
+
+            response.IsSuccessStatusCode.Should().BeFalse();
+        }
+
+        private async Task<HttpResponseMessage> SendCalculateCongestionTaxRequest(CalculateCongestionTaxCommand calculateCongestionTaxCommand)
+        {
+            HttpContent httpContent =
+                new StringContent(JsonConvert.SerializeObject(calculateCongestionTaxCommand), Encoding.UTF8);
+            httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var createOrderHttpResponseMessage =
+                await Client.PostAsync(CalculateCongestionTaxUri, httpContent, default);
+
+            return createOrderHttpResponseMessage;
+        }
+
         private async Task<HttpResponseMessage> SendCalculateCongestionTaxRequest(string countryCode,
             string city,
             string vehicleType,
@@ -194,13 +216,7 @@ namespace Volvo.CongestionTax.WebAPI.IntegrationTests
                 PassagesTimes = passagesTimes
             };
 
-            HttpContent httpContent =
-                new StringContent(JsonConvert.SerializeObject(calculateCongestionTaxCommand), Encoding.UTF8);
-            httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            var createOrderHttpResponseMessage =
-                await Client.PostAsync(CalculateCongestionTaxUri, httpContent, default);
-
-            return createOrderHttpResponseMessage;
+            return await SendCalculateCongestionTaxRequest(calculateCongestionTaxCommand);
         }
     }
 }
