@@ -36,7 +36,7 @@ namespace Volvo.CongestionTax.Domain.Services
                 c.CountryCode == countryCode
                 && c.City == city, cancellationToken);
 
-            if (cityCongestionTaxRules == null) throw new CongestionTaxRulesNotException(countryCode, city);
+            if (cityCongestionTaxRules == null) throw new CongestionTaxRulesNotFoundException(countryCode, city);
 
             var publicHolidaysForCountry = await _publicHolidaysRepository.FindAsync(h => h.IsActive
                 && h.CountryCode == countryCode, cancellationToken);
