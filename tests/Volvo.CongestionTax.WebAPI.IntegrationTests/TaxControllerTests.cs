@@ -6,12 +6,10 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
-using FluentValidation;
 using Newtonsoft.Json;
 using Volvo.CongestionTax.Application.Commands;
 using Volvo.CongestionTax.WebAPI.IntegrationTests.Extensions;
 using Xunit;
-using Xunit.Sdk;
 
 namespace Volvo.CongestionTax.WebAPI.IntegrationTests
 {
@@ -60,7 +58,7 @@ namespace Volvo.CongestionTax.WebAPI.IntegrationTests
                 "Car",
                 new List<DateTime>
                 {
-                    new(year, month, day, hour, minute, 00),
+                    new(year, month, day, hour, minute, 00)
                 });
 
             response.IsSuccessStatusCode.Should().BeTrue();
@@ -84,7 +82,7 @@ namespace Volvo.CongestionTax.WebAPI.IntegrationTests
                 taxExemptVehicle,
                 new List<DateTime>
                 {
-                    new(2013, 1, 10, 8, 45, 00),
+                    new(2013, 1, 10, 8, 45, 00)
                 });
 
             response.IsSuccessStatusCode.Should().BeTrue();
@@ -152,7 +150,7 @@ namespace Volvo.CongestionTax.WebAPI.IntegrationTests
                 new List<DateTime>
                 {
                     new(2013, 6, 10, 6, 20, 00), //SEK 8
-                    new(2013, 6, 10, 7, 20, 00), //SEK 18
+                    new(2013, 6, 10, 7, 20, 00) //SEK 18
                 });
 
             response.IsSuccessStatusCode.Should().BeTrue();
@@ -173,7 +171,7 @@ namespace Volvo.CongestionTax.WebAPI.IntegrationTests
                     new(2013, 6, 10, 6, 20, 00), //SEK 8
                     new(2013, 6, 10, 8, 20, 00), //SEK 13
                     new(2013, 6, 10, 19, 50, 00), //SEK 0
-                    new(2013, 6, 10, 1, 40, 00), //SEK 0
+                    new(2013, 6, 10, 1, 40, 00) //SEK 0
                 });
 
             response.IsSuccessStatusCode.Should().BeTrue();
@@ -192,7 +190,8 @@ namespace Volvo.CongestionTax.WebAPI.IntegrationTests
             response.IsSuccessStatusCode.Should().BeFalse();
         }
 
-        private async Task<HttpResponseMessage> SendCalculateCongestionTaxRequest(CalculateCongestionTaxCommand calculateCongestionTaxCommand)
+        private async Task<HttpResponseMessage> SendCalculateCongestionTaxRequest(
+            CalculateCongestionTaxCommand calculateCongestionTaxCommand)
         {
             HttpContent httpContent =
                 new StringContent(JsonConvert.SerializeObject(calculateCongestionTaxCommand), Encoding.UTF8);
