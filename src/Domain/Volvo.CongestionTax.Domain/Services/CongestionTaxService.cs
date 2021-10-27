@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Volvo.CongestionTax.Domain.Entities;
 using Volvo.CongestionTax.Domain.EqualityComparers;
+using Volvo.CongestionTax.Domain.Events;
 using Volvo.CongestionTax.Domain.Exceptions;
 using Volvo.Domain.SharedKernel;
 using Volvo.Infrastructure.SharedKernel.Repositories;
@@ -41,7 +42,17 @@ namespace Volvo.CongestionTax.Domain.Services
 
             var publicHolidaysForCountry = await GetPublicHolidaysByCountryCode(countryCode, cancellationToken);
 
-            return Calculate(cityCongestionTaxRules, publicHolidaysForCountry, passageDates);
+            var totalAmount = Calculate(cityCongestionTaxRules, publicHolidaysForCountry, passageDates);
+
+            await _domainEventService.Publish(new CongestionTaxCalculatedEvent
+            {
+                City = city,
+                VehicleType = vehicleType,
+                PassagesTimes = passageDates,
+                Amount = totalAmount
+            });
+
+            return totalAmount;
         }
 
         private decimal Calculate(CityCongestionTaxRules cityCongestionTaxRules,
