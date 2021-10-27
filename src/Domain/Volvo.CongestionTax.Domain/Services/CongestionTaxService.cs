@@ -36,10 +36,10 @@ namespace Volvo.CongestionTax.Domain.Services
 
             if (cityCongestionTaxRules == null) throw new CongestionTaxRulesNotFoundException(countryCode, city);
 
-            var publicHolidaysForCountry = await GetPublicHolidaysByCountryCode(countryCode, cancellationToken);
-
             if (CheckIfTaxExemptVehicle(cityCongestionTaxRules, vehicleType))
                 return 0;
+
+            var publicHolidaysForCountry = await GetPublicHolidaysByCountryCode(countryCode, cancellationToken);
 
             return Calculate(cityCongestionTaxRules, publicHolidaysForCountry, passageDates);
         }
