@@ -45,7 +45,11 @@ Looking around your colleagues desk, you find a list of dates scribbled on a pos
 - As stated there may be bugs in the code, try to find and fix them.
 - There is no particular structure to the code so there are several improvements that can be made.
 
-You may limit the scope to the year 2013 and you are not expected to spend more than 4 hours in total on this assignment. The starting code is provided in Java, C#, Python, Go and TypeScript, pick the language you are most comfortable with. If you want to write your code using a different language, feel free.
+You may limit the scope to the year 2013.
+
+Please limit your total time spent on this assigment to 4 hours. We are not looking for a complete solution and we are interested to see how you prioritise your work given the time constraint. Feel free to document what you wanted to focus on in the time given and layout any additional work you would like to have done with more time.
+
+The starting code is provided in Java, C#, Python, Go and TypeScript, pick the language you are most comfortable with. If you want to write your code using a different language, feel free.
 
 ## Congestion tax rules in Gothenburg
 
