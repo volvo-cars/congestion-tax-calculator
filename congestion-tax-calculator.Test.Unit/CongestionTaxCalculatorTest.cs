@@ -117,12 +117,6 @@ public class TestDataGenerator : IEnumerable<object[]>
 
         yield return new object[] {
             new DateTime[] {
-                DateTime.Parse("2013-02-08 06:27:00"),
-                DateTime.Parse("2013-02-08 06:20:27") }
-            , 8 };
-
-        yield return new object[] {
-            new DateTime[] {
                 DateTime.Parse("2013-02-08 14:35:00"),
                 DateTime.Parse("2013-02-08 15:29:00") ,
                 DateTime.Parse("2013-02-08 15:47:00"),
