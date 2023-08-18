@@ -19,7 +19,7 @@ public class CongestionTaxCalculatorFactory
     public ICongestionTaxCalculator Create(DateTime[] vehiclePassTimes)
     {
         var duration = vehiclePassTimes.Last().Subtract(vehiclePassTimes.First());
-
+        // TODO : get 60 from each city config
         if (duration.TotalMinutes <= 60)
             return new CongestionSingleChargeRuleTaxCalculator(_calendarRepository, _tollTaxRuleSet);
         else
