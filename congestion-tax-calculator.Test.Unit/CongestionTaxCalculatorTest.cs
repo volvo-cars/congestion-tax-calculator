@@ -3,6 +3,7 @@ using congestion.Contract;
 using congestion.Model;
 using congestion.Service;
 using Moq;
+using System;
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
@@ -17,6 +18,7 @@ namespace congestion_tax_calculator.Test.Unit
         private ICalendarRepository _calendarRepository;
         private Mock<ICalendarRepository> _calendarRepositoryMock;
         private TollTaxRuleSetBuilder _tollTaxRuleSetBuilder;
+        private CongestionTaxCalculatorFactory _congestionTaxCalculatorFactory;
 
         public CongestionTaxCalculatorTest(TaxCalculatorTestFixture fixture)
         {
@@ -26,16 +28,17 @@ namespace congestion_tax_calculator.Test.Unit
             _calendarRepositoryMock.Setup(x => x.Get(It.IsAny<int>())).Returns(fixture.Calendar);
 
             _calendarRepository = _calendarRepositoryMock.Object;
+            _congestionTaxCalculatorFactory = new CongestionTaxCalculatorFactory(_calendarRepository, _testFixture.TollTaxRuleSet);
         }
 
         [Fact]
         public void Calc_TollFee_For_SingleRule()
         {
-            var car = new Car();
+            var car = new Vehicle();
             var firstPassingDate = new DateTime(2013, 1, 2, 6, 5, 0);
             DateTime[] dateTimes = new[] { firstPassingDate, firstPassingDate.AddMinutes(10), firstPassingDate.AddMinutes(40) };
 
-            var sut = new CongestionSingleCHargeTaxCalculator(_calendarRepository, _testFixture.TollTaxRuleSet);
+            var sut = _congestionTaxCalculatorFactory.Create(dateTimes);
             int expectedFee = 13;
             var tollFee = sut.GetTax(car, dateTimes);
 
@@ -46,8 +49,8 @@ namespace congestion_tax_calculator.Test.Unit
         [MemberData(nameof(TestDataGenerator.GetVehiclePassingData), MemberType = typeof(TestDataGenerator))]
         public void Calc_TollFee_For_GeneralRule(DateTime[] passingTimes, int expectedFee)
         {
-            var car = new Car();
-            var sut = new CongestionSingleCHargeTaxCalculator(_calendarRepository, _testFixture.TollTaxRuleSet);
+            var car = new Vehicle();
+            var sut = _congestionTaxCalculatorFactory.Create(passingTimes);
 
             var tollFee = sut.GetTax(car, passingTimes);
 
@@ -57,11 +60,11 @@ namespace congestion_tax_calculator.Test.Unit
         [Fact]
         public void Calc_Free_TollFee_For_July()
         {
-            var car = new Car();
+            var car = new Vehicle();
             var firstPassingDateInJuly = new DateTime(2013, 7, 2, 6, 5, 0);
 
             DateTime[] dateTimes = new[] { firstPassingDateInJuly, firstPassingDateInJuly.AddMinutes(10), firstPassingDateInJuly.AddMinutes(40) };
-            var sut = new CongestionSingleCHargeTaxCalculator(_calendarRepository, _testFixture.TollTaxRuleSet);
+            var sut = _congestionTaxCalculatorFactory.Create(dateTimes);
             int expectedFee = 0;
             var tollFee = sut.GetTax(car, dateTimes);
 
@@ -76,9 +79,9 @@ namespace congestion_tax_calculator.Test.Unit
             tollCalendarBuilder.ForYare(2013)
                 .WithHolidayDates(new[] { holiday });
             _calendarRepositoryMock.Setup(x => x.Get(It.IsAny<int>())).Returns(tollCalendarBuilder.Build());
-            var car = new Car();
+            var car = new Vehicle();
             var dateBeforHoliday = new DateTime(2013, 5, 6, 8, 15, 20);
-            var sut = new CongestionSingleCHargeTaxCalculator(_calendarRepository, _testFixture.TollTaxRuleSet);
+            var sut = _congestionTaxCalculatorFactory.Create(new[] { dateBeforHoliday });
             int expectedFee = 0;
             var tollFee = sut.GetTax(car, new[] { dateBeforHoliday });
 
@@ -94,8 +97,8 @@ namespace congestion_tax_calculator.Test.Unit
                 .WithHolidayDates(new[] { holiday });
             _calendarRepositoryMock.Setup(x => x.Get(It.IsAny<int>())).Returns(tollCalendarBuilder.Build());
 
-            var car = new Car();
-            var sut = new CongestionSingleCHargeTaxCalculator(_calendarRepository, _testFixture.TollTaxRuleSet);
+            var car = new Vehicle();
+            var sut = _congestionTaxCalculatorFactory.Create(new[] { holiday });
             int expectedFee = 0;
             var tollFee = sut.GetTax(car, new[] { holiday });
 
@@ -133,7 +136,7 @@ public class TestDataGenerator : IEnumerable<object[]>
                 DateTime.Parse("2013-02-08 15:29:00") ,
                 DateTime.Parse("2013-02-08 15:47:00"),
                 DateTime.Parse("2013-02-08 16:01:00"),
-            }, 56 };
+            }, 57 };
 
         yield return new object[] { new DateTime[] { DateTime.Parse("2013-02-08 17:49:00") }, 13 };
         yield return new object[] { new DateTime[] { DateTime.Parse("2013-02-08 18:29:00") }, 8 };

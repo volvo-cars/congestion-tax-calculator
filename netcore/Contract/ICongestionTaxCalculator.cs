@@ -5,5 +5,5 @@ namespace congestion.Contract;
 
 public interface ICongestionTaxCalculator
 {
-    int GetTax(Vehicle vehicle, DateTime[] dates);
+    int GetTax(Vehicle vehicle, DateTime[] vehiclePassTimes);
 }

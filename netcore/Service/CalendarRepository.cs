@@ -16,6 +16,7 @@ public class CalendarRepository : ICalendarRepository
 
     public Calendar Get(int yare)
     {
+        //TODO : Add to cach
         return _dbContxt.Set<Calendar>().Find(yare);
     }
 
