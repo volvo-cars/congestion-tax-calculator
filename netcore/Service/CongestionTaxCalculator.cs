@@ -5,44 +5,47 @@ using congestion.Model;
 
 namespace congestion.Service;
 
-public class CongestionTaxCalculator : ICongestionTaxCalculator
+public class CongestionSingleCHargeTaxCalculator : ICongestionTaxCalculator
 {
-    private readonly CalendarService _calendar;
-    private readonly TollTaxRuleSet _tollTaxRuleSet;
+    private readonly ICalendarRepository _calendarRepository;
+    private Model.Calendar _calendar;
+    private readonly TollTaxRuleSet _tollTaxSettingsSet;
 
-    public CongestionTaxCalculator(CalendarService calendar, TollTaxRuleSet tollTaxRuleSet)
+    public CongestionSingleCHargeTaxCalculator(ICalendarRepository calendarRepository, TollTaxRuleSet tollTaxRuleSet)
     {
-        _calendar = calendar;
-        _tollTaxRuleSet = tollTaxRuleSet;
+        _calendarRepository = calendarRepository;
+        _tollTaxSettingsSet = tollTaxRuleSet;
     }
 
-    public int GetTax(Vehicle vehicle, DateTime[] dates)
+    public int GetTax(Vehicle vehicle, DateTime[] passingTimes)
     {
-        var duration = dates.Last().Subtract(dates.First());
-        bool calculateWithSingleRuleTax = duration.Minutes <= 60;
+        var duration = passingTimes.Last().Subtract(passingTimes.First());
+        bool calculateWithSingleRuleTax = duration.TotalMinutes <= 60;
         var totalFee = calculateWithSingleRuleTax
-              ? GetSingleRuleTax(vehicle, dates)
-              : GetGeneralRuleTax(vehicle, dates);
-        if (totalFee > 60) totalFee = 60;
-        return totalFee;
+              ? GetSingleRuleTax(vehicle, passingTimes)
+              : GetGeneralRuleTax(vehicle, passingTimes);
+
+        return totalFee > 60
+            ? 60
+            : totalFee;
     }
 
-    public int GetTollFee(DateTime date, Vehicle vehicle)
+    protected int GetTollFee(DateTime passingTime, Vehicle vehicle)
     {
-        return IsTollFree(date, vehicle)
-           ? 0
-           : _tollTaxRuleSet.GetFee(date);
+        return _tollTaxSettingsSet.GetFee(passingTime);
     }
 
-    protected bool IsTollFree(DateTime date, Vehicle vehicle)
+    protected bool IsTollFree(DateTime passingTime, Vehicle vehicle)
     {
-        return IsTollFreeDate(date) || IsTollFreeVehicle(vehicle);
+        return IsTollFreeDate(passingTime) || IsTollFreeVehicle(vehicle);
     }
 
-    protected int GetGeneralRuleTax(Vehicle vehicle, DateTime[] dates)
+    protected int GetGeneralRuleTax(Vehicle vehicle, DateTime[] passingTimes)
     {
         var totalFee = 0;
-        foreach (DateTime date in dates)
+        if (IsTollFree(passingTimes.First(), vehicle)) return totalFee;
+
+        foreach (DateTime date in passingTimes)
         {
             totalFee += GetTollFee(date, vehicle);
             if (totalFee > 60)
@@ -51,10 +54,12 @@ public class CongestionTaxCalculator : ICongestionTaxCalculator
         return totalFee;
     }
 
-    protected int GetSingleRuleTax(Vehicle vehicle, DateTime[] dates)
+    protected int GetSingleRuleTax(Vehicle vehicle, DateTime[] passingTimes)
     {
         var totalFee = 0;
-        foreach (DateTime date in dates)
+        if (IsTollFree(passingTimes.First(), vehicle)) return totalFee;
+
+        foreach (DateTime date in passingTimes)
         {
             int tollFee = GetTollFee(date, vehicle);
             if (totalFee < tollFee)
@@ -63,9 +68,12 @@ public class CongestionTaxCalculator : ICongestionTaxCalculator
         return totalFee;
     }
 
-    protected bool IsTollFreeDate(DateTime date)
+    protected bool IsTollFreeDate(DateTime passingDate)
     {
-        return _calendar.IsTollFreeDate(date);
+        _calendar = _calendarRepository.Get(passingDate.Year);
+        var isDayBeforPublicHoliday = _calendar.IsPublicHolidaye(passingDate.AddDays(1));
+
+        return isDayBeforPublicHoliday || _calendar.IsWeekend(passingDate) || _calendar.IsPublicHolidaye(passingDate) || _calendar.IsDayOfMounth(passingDate, Month.July);
     }
 
     protected bool IsTollFreeVehicle(Vehicle vehicle)

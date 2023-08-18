@@ -1,26 +1,25 @@
 ﻿using congestion.calculator;
+using congestion.Contract;
 using congestion.Model;
 using System;
 
 namespace congestion.Service;
 
-public class CalendarService
+public class CalendarRepository : ICalendarRepository
 {
-    private readonly ApplicationDbContxt _dbContxt;
+    private readonly ApplicationDbContext _dbContxt;
 
-    public CalendarService(ApplicationDbContxt dbContxt)
+    public CalendarRepository(ApplicationDbContext dbContxt)
     {
         _dbContxt = dbContxt;
     }
 
-    public bool IsTollFreeDate(DateTime date)
+    public Calendar Get(int yare)
     {
-        var claendar = _dbContxt.Set<Calendar>().Find(date.Year);
-
-        return claendar.IsTollFreeDate(date.Date);
+        return _dbContxt.Set<Calendar>().Find(yare);
     }
 
-    public void AddCalendar(Calendar calendar)
+    public void Add(Calendar calendar)
     {
         _dbContxt.Set<Calendar>().Add(calendar);
         _dbContxt.SaveChanges();

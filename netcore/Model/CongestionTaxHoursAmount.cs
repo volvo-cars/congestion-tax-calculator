@@ -1,12 +1,19 @@
 ﻿using System;
 
-public class TollTaxAmountRule
+public class TollTaxRule
 {
-    public TimeOnly From { get; init; }
+    public TimeOnly From { get; private set; }
 
-    public TimeOnly To { get; init; }
+    public TollTaxRule(TimeOnly from, TimeOnly to, int amount)
+    {
+        From = from;
+        To = to;
+        Amount = amount;
+    }
 
-    public int Amount { get; init; }
+    public TimeOnly To { get; private set; }
+
+    public int Amount { get; private set; }
 
     public bool IsMach(TimeOnly passingTime)
     {
