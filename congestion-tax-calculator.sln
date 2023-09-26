@@ -15,15 +15,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{94511166-26C5-4724-AF0C-ED3838442B42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "congestion-tax-calculator.Application", "congestion-tax-calculator.Application\congestion-tax-calculator.Application.csproj", "{B504ED9C-F7FC-4D6C-B0BE-9188A6D3EF65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "congestion-tax-calculator.Application", "congestion-tax-calculator.Application\congestion-tax-calculator.Application.csproj", "{B504ED9C-F7FC-4D6C-B0BE-9188A6D3EF65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "congestion-tax-calculator.Domain", "congestion-tax-calculator.Domain\congestion-tax-calculator.Domain.csproj", "{8D9AAA7E-66B2-45FA-BFE5-DB00771C1C8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "congestion-tax-calculator.Domain", "congestion-tax-calculator.Domain\congestion-tax-calculator.Domain.csproj", "{8D9AAA7E-66B2-45FA-BFE5-DB00771C1C8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "congestion-tax-calculator.Infrastructure", "congestion-tax-calculator.Infrastructure\congestion-tax-calculator.Infrastructure.csproj", "{C4E5FE73-2D10-44AA-B777-2A1A19B80E08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "congestion-tax-calculator.Infrastructure", "congestion-tax-calculator.Infrastructure\congestion-tax-calculator.Infrastructure.csproj", "{C4E5FE73-2D10-44AA-B777-2A1A19B80E08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "congestion-tax-calculator.Persistence", "congestion-tax-calculator.Persistence\congestion-tax-calculator.Persistence.csproj", "{D7302AB5-FC72-4F07-8E1B-4E7438D4746E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "congestion-tax-calculator.Persistence", "congestion-tax-calculator.Persistence\congestion-tax-calculator.Persistence.csproj", "{D7302AB5-FC72-4F07-8E1B-4E7438D4746E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "congestion-tax-calculator.API", "congestion-tax-calculator.API\congestion-tax-calculator.API.csproj", "{843D0947-75B7-46BE-B54B-68ECF80AFF6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "congestion-tax-calculator.API", "congestion-tax-calculator.API\congestion-tax-calculator.API.csproj", "{843D0947-75B7-46BE-B54B-68ECF80AFF6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
