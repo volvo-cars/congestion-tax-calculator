@@ -13,16 +13,11 @@
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.5" />
 		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.2.1" />
 		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+		<PackageReference Include="Nager.Date" Version="1.40.0" />
 	</ItemGroup>
 	
   <ItemGroup>
     <ProjectReference Include="..\congestion-tax-calculator.Domain\congestion-tax-calculator.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="CommonResponse\" />
-    <Folder Include="CQRS\" />
-    <Folder Include="Validators\" />
   </ItemGroup>
 
 </Project>

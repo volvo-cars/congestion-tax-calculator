@@ -1,25 +1,24 @@
 ﻿using congestion_tax_calculator.Application.Interfaces.Repos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Nager.Date;
 
-namespace congestion_tax_calculator_net_core.Infrastructure.Repositories
+namespace congestion_tax_calculator.Infrastructure.Repositories
 {
     public class HolidayService : IHolidayService
     {
         public List<DateTime> GetPublicHolidays(int year, string countryCode)
         {
-            throw new NotImplementedException();
+            //var dateSystem = DateSystemFactory.Create();
+            var dateSystem = DateSystem.IsWeekend(DateTime.Now, countryCode);
+            var publicHolidays = DateSystem.GetPublicHolidays(year, countryCode).Cast<DateTime>().ToList();
+            return publicHolidays;
         }
-
         public bool IsPublicHolidays(DateTime entryDate, string countryCode)
         {
-            throw new NotImplementedException();
+            return DateSystem.IsPublicHoliday(entryDate, countryCode);
         }
-
         public bool IsWeekends(DateTime entryDate, string countryCode)
         {
-            throw new NotImplementedException();
+            return DateSystem.IsWeekend(entryDate, countryCode);
         }
     }
 }

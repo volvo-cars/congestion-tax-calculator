@@ -29,10 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\congestion-tax-calculator.Application\congestion-tax-calculator.Application.csproj" />
     <ProjectReference Include="..\congestion-tax-calculator.Infrastructure\congestion-tax-calculator.Infrastructure.csproj" />
   </ItemGroup>
