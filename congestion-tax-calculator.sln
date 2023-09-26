@@ -1,0 +1,71 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32602.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{03B9C72D-226A-4D2D-8810-FD025710B3FB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{38ECEB8F-ED3E-4222-ACE9-2BB995936EF9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{5A64F696-C0BF-4D8B-A852-87A473284FD5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{20558178-2BEF-42EB-8BFE-1A8A02C8A8A6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{C8AAC193-E9A6-4C21-8780-402534D85091}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{94511166-26C5-4724-AF0C-ED3838442B42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "congestion-tax-calculator.Application", "congestion-tax-calculator.Application\congestion-tax-calculator.Application.csproj", "{B504ED9C-F7FC-4D6C-B0BE-9188A6D3EF65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "congestion-tax-calculator.Domain", "congestion-tax-calculator.Domain\congestion-tax-calculator.Domain.csproj", "{8D9AAA7E-66B2-45FA-BFE5-DB00771C1C8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "congestion-tax-calculator.Infrastructure", "congestion-tax-calculator.Infrastructure\congestion-tax-calculator.Infrastructure.csproj", "{C4E5FE73-2D10-44AA-B777-2A1A19B80E08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "congestion-tax-calculator.Persistence", "congestion-tax-calculator.Persistence\congestion-tax-calculator.Persistence.csproj", "{D7302AB5-FC72-4F07-8E1B-4E7438D4746E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "congestion-tax-calculator.API", "congestion-tax-calculator.API\congestion-tax-calculator.API.csproj", "{843D0947-75B7-46BE-B54B-68ECF80AFF6C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B504ED9C-F7FC-4D6C-B0BE-9188A6D3EF65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B504ED9C-F7FC-4D6C-B0BE-9188A6D3EF65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B504ED9C-F7FC-4D6C-B0BE-9188A6D3EF65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B504ED9C-F7FC-4D6C-B0BE-9188A6D3EF65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D9AAA7E-66B2-45FA-BFE5-DB00771C1C8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D9AAA7E-66B2-45FA-BFE5-DB00771C1C8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D9AAA7E-66B2-45FA-BFE5-DB00771C1C8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D9AAA7E-66B2-45FA-BFE5-DB00771C1C8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4E5FE73-2D10-44AA-B777-2A1A19B80E08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4E5FE73-2D10-44AA-B777-2A1A19B80E08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4E5FE73-2D10-44AA-B777-2A1A19B80E08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4E5FE73-2D10-44AA-B777-2A1A19B80E08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7302AB5-FC72-4F07-8E1B-4E7438D4746E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7302AB5-FC72-4F07-8E1B-4E7438D4746E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7302AB5-FC72-4F07-8E1B-4E7438D4746E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7302AB5-FC72-4F07-8E1B-4E7438D4746E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{843D0947-75B7-46BE-B54B-68ECF80AFF6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{843D0947-75B7-46BE-B54B-68ECF80AFF6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{843D0947-75B7-46BE-B54B-68ECF80AFF6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{843D0947-75B7-46BE-B54B-68ECF80AFF6C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{20558178-2BEF-42EB-8BFE-1A8A02C8A8A6} = {03B9C72D-226A-4D2D-8810-FD025710B3FB}
+		{C8AAC193-E9A6-4C21-8780-402534D85091} = {03B9C72D-226A-4D2D-8810-FD025710B3FB}
+		{94511166-26C5-4724-AF0C-ED3838442B42} = {03B9C72D-226A-4D2D-8810-FD025710B3FB}
+		{B504ED9C-F7FC-4D6C-B0BE-9188A6D3EF65} = {20558178-2BEF-42EB-8BFE-1A8A02C8A8A6}
+		{8D9AAA7E-66B2-45FA-BFE5-DB00771C1C8A} = {20558178-2BEF-42EB-8BFE-1A8A02C8A8A6}
+		{C4E5FE73-2D10-44AA-B777-2A1A19B80E08} = {C8AAC193-E9A6-4C21-8780-402534D85091}
+		{D7302AB5-FC72-4F07-8E1B-4E7438D4746E} = {C8AAC193-E9A6-4C21-8780-402534D85091}
+		{843D0947-75B7-46BE-B54B-68ECF80AFF6C} = {94511166-26C5-4724-AF0C-ED3838442B42}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4405701A-43DB-4A15-BE59-573F6219C1F9}
+	EndGlobalSection
+EndGlobal
